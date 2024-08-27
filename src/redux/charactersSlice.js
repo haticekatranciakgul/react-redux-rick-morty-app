@@ -33,7 +33,7 @@ export const charactersSlice= createSlice({
 
             .addCase(fetchCharacters.fulfilled, (state, action) => {
 
-                state.items = action.payload; // API'den gelen veriyi items'a ata
+                state.items = action.payload; 
 
                 state.status = 'succeeded';
 

@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchCharacters = createAsyncThunk('characters/getCharacters', async() => {
-    const res = await axios.get(`${process.env.REACT_APP_API_BASE_ENDPOINT}/character`);
-    console.log(res.data)
-    return res.data.results;
-    
+export const fetchCharacters = createAsyncThunk('characters/', async(pageNum) => {
+    const res = await axios(`${process.env.REACT_APP_API_BASE_ENDPOINT}/character?page=${pageNum}`);
+    console.log('API Response:', res.data); // API yanıtını kontrol et
+    return res.data;
 })
 
 const initialState = {
@@ -14,7 +13,6 @@ const initialState = {
     error: null,
     num: 1,
     hasNextPage: true,
-
 }
 
 export const charactersSlice= createSlice({
@@ -29,13 +27,25 @@ export const charactersSlice= createSlice({
 
                 state.status = 'loading';
 
+                state.isLoading = true;
+
             })
 
             .addCase(fetchCharacters.fulfilled, (state, action) => {
 
-                state.items = action.payload; 
+                state.items = [...state.items, ...action.payload.results ] 
 
                 state.status = 'succeeded';
+
+                state.isLoading = false;
+
+                state.num +=1; 
+
+                if(action.payload.length < 20){
+                    state.hasNextPage = false;
+                } 
+
+           
 
             })
 
@@ -44,6 +54,9 @@ export const charactersSlice= createSlice({
                 state.status = 'failed';
 
                 state.error = action.error.message;
+
+                state.isLoading = false;
+
 
             });
 

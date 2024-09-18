@@ -13,7 +13,12 @@ const Navbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
-
+    
+    const handleClick = (e) => {
+        e.preventDefault();
+        colorMode.toggleColorMode(); // Mode'u değiştiren fonksiyon
+console.log("toggleColorMode tıklandı")
+      }
 
     return (
         <Box display="flex" justifyContent="space-between" p={2}>
@@ -31,7 +36,7 @@ const Navbar = () => {
                 </Box>
             </Box>
             <Box display="flex">
-                <IconButton onClick={colorMode.toggleColorMode}>
+            <IconButton onClick={handleClick}>
                     {theme.palette.mode === "dark" ? (
 
                         <LightModeOutlinedIcon />
@@ -39,6 +44,14 @@ const Navbar = () => {
                         <DarkModeOutlinedIcon />
                     )}
                 </IconButton>
+                {/* <IconButton onClick={colorMode.toggleColorMode}>
+                    {theme.palette.mode === "dark" ? (
+
+                        <LightModeOutlinedIcon />
+                    ) : (
+                        <DarkModeOutlinedIcon />
+                    )}
+                </IconButton> */}
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>

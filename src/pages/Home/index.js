@@ -5,6 +5,12 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -17,42 +23,61 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Home() {
   const characters = useSelector((state) => state.characters.items);
-  const isLoading = useSelector((state) => state.characters.isLoading);
+  const status = useSelector((state) => state.characters.status);
+  const hasNextPage = useSelector((state) => state.characters.hasNextPage);
   const error = useSelector((state) => state.characters.error);
-
-
-  const dispatch = useDispatch()
-
+  const num = useSelector((state) => state.characters.num);
+  const dispatch = useDispatch();
+  
 
   useEffect(() => {
-    dispatch(fetchCharacters());
-    //console.log("here")
-  }, [dispatch])
+    if (status === "idle") {
+        dispatch(fetchCharacters(1));
+    }
 
-  if (isLoading) {
-    return <div>Loading...</div>
+}, [dispatch, status])
+
+if (!characters) {
+  return null;
+}
+
+  if (status === "failed") {
+    return <Error message={error} />;
+}
+
+
+const handleLoadMore = () => {
+  if (hasNextPage && status !== "loading") {
+    dispatch(fetchCharacters(num));
+    console.log("handleLoadMore butonu")
   }
-  if (error) {
-    return <div>Error: {error}</div>
-  }
-
-
-
+};
   return (
-      <Container>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {characters?.map(character => (
-          <Grid xs={2} sm={4} md={4} key={character.id} >
-            <Item>
-            <img src={character.image} alt={character.name} />
-
-            </Item>
-          </Grid>
-        ))}  
+    <Container>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          {characters.map((character,id) => (
+            <Grid xs={3} key={`${character.id}-${id}`}>
+              <Item>
+                <img src={character.image} alt={character.name} width={'auto'} objectfit={'cover'} height={'200px'} />
+                <Typography variant="h5" sx={{ pt: 2 }} gutterBottom>
+                  {character.name}
+                </Typography>
+                <Typography>{character.id}</Typography>
+              </Item>
+            </Grid>
+          ))}
         </Grid>
-      </Container>
-
-
+        {status === "loading" && <Loading />}
+        {hasNextPage && status !== "loading" && <div >
+          {/* <Button variant="contained" sx={{ m: 3 }} onClick={() => dispatch(fetchCharacters(num))}>Load More</Button> */}
+          <Button variant="contained" sx={{ m: 3 }} onClick={handleLoadMore}>Load More</Button>
+        </div>}
+        {!hasNextPage && <div className='row my-5  d-flex justify-content-center align-content-center'>
+          <button className='btn btn-light w-25' disabled>There is nothing to be shown</button>
+        </div>}
+      </Box>
+    </Container>
   )
 }
 

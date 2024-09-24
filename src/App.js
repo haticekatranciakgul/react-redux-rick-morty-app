@@ -1,27 +1,55 @@
 import './App.css';
 import Home from './pages/Home/index';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ColorModeContext, useMode } from "./theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import Navbar from "../src/components/Navbar";
+import Episodes from "./pages/Episodes/index";
+import Detail from "./pages/Detail/index";
+import Characters from './pages/Characters/index'
+
 
 function App() {
-  const [theme, colorMode] = useMode();
+
   return (
     <div className="App">
-      <ColorModeContext.Provider value={colorMode}>
+       <BrowserRouter>
+        
+        <Routes>
+          <Route  path="/" element={<Home />}>
+          <Route path="/" element={<Characters />} />
+          <Route path="/character/:id" element={<Detail />} />
+          <Route path="/locations" component={Location} />
+          <Route path="/episodes" component={Episodes} />
+          
+          
+        </Route>
+         
+        </Routes>
+      </BrowserRouter>
+      {/* <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
-        <CssBaseline />
+          <CssBaseline />
           <BrowserRouter>
             <Navbar></Navbar>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route exact path="/" element={<Home />} />
+              <Route path="/character/:id" component={Detail} />
+              <Route path="/locations" component={Location} />
+              <Route path="/episodes" component={Episodes} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
-      </ColorModeContext.Provider>
+      </ColorModeContext.Provider> */}
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+

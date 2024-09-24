@@ -44,14 +44,6 @@ console.log("toggleColorMode tıklandı")
                         <DarkModeOutlinedIcon />
                     )}
                 </IconButton>
-                {/* <IconButton onClick={colorMode.toggleColorMode}>
-                    {theme.palette.mode === "dark" ? (
-
-                        <LightModeOutlinedIcon />
-                    ) : (
-                        <DarkModeOutlinedIcon />
-                    )}
-                </IconButton> */}
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>

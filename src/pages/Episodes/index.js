@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Users() {
+function index() {
   return (
     <div>
-      Users
+      episodes
     </div>
   )
 }
 
-export default Users
+export default index

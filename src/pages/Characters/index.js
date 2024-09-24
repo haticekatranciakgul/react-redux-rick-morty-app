@@ -80,20 +80,12 @@ function Home() {
                       </CardContent>
                   </Grid>
                 </Card>
-                {/* <Item>
-                  <img src={character.image} alt={character.name} width={'auto'} objectfit={'cover'} height={'auto'} />
-                  <Typography variant="h5" sx={{ pt: 2 }} gutterBottom>
-                    {character.name}
-                  </Typography>
-                  <Typography>{character.id}</Typography>
-                </Item> */}
               </Link>
             </Grid>
           ))}
         </Grid>
         {status === "loading" && <Loading />}
         {hasNextPage && status !== "loading" && <div >
-          {/* <Button variant="contained" sx={{ m: 3 }} onClick={() => dispatch(fetchCharacters(num))}>Load More</Button> */}
           <Button variant="contained" sx={{ m: 3 }} onClick={handleLoadMore}>Load More</Button>
         </div>}
         {!hasNextPage &&

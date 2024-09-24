@@ -39,8 +39,15 @@
 
 a {
   text-decoration: none!important;
+  color: #5a5a5a;
+  font-weight: 600;
+
 
 }
 a:hover {
   opacity: 50%!important;
+}
+a:focus, a:active {
+  outline: none; /* Odaklanan kenar çizgisi kaldırılır */
+  color: inherit; /* Tıklanınca renk değişimi olmaz */
 }

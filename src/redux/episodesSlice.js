@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchCharacters = createAsyncThunk('characters/', async(pageNum) => {
-    const res = await axios(`${process.env.REACT_APP_API_BASE_ENDPOINT}/character?page=${pageNum}`);
-    console.log('API Response:', res.data); // API yanıtını kontrol et
+export const fetchEpisodes = createAsyncThunk('episodes/getEpisodes', async(pageNum) => {
+    const res = await axios(`${process.env.REACT_APP_API_BASE_ENDPOINT}/episode?page=${pageNum}`);
+    console.log('API Response:', res.data);
     return res.data;
 })
 
@@ -15,15 +15,15 @@ const initialState = {
     hasNextPage: true,
 }
 
-export const charactersSlice= createSlice({
-    name: 'characters',
+export const episodesSlice= createSlice({
+    name: 'episode',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
 
         builder
 
-            .addCase(fetchCharacters.pending, (state) => {
+            .addCase(fetchEpisodes.pending, (state) => {
 
                 state.status = 'loading';
 
@@ -31,13 +31,11 @@ export const charactersSlice= createSlice({
 
             })
 
-            .addCase(fetchCharacters.fulfilled, (state, action) => {
+            .addCase(fetchEpisodes.fulfilled, (state, action) => {
 
                 state.items = [...state.items, ...action.payload.results ] 
 
                 state.status = 'succeeded';
-
-                state.isLoading = false;
 
                 state.num +=1; 
 
@@ -46,13 +44,11 @@ export const charactersSlice= createSlice({
                 } 
             })
 
-            .addCase(fetchCharacters.rejected, (state, action) => {
+            .addCase(fetchEpisodes.rejected, (state, action) => {
 
                 state.status = 'failed';
 
                 state.error = action.error.message;
-
-                state.isLoading = false;
 
             });
 
@@ -61,4 +57,4 @@ export const charactersSlice= createSlice({
 
 });
 
-export default charactersSlice.reducer;
+export default episodesSlice.reducer;

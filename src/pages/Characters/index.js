@@ -52,7 +52,7 @@ function Home() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {characters.map((character, id) => (
-            <Grid xs={3} key={`${character.id}-${id}`}>
+            <Grid xl={3} lg={3} md={3} sm={4} xs={12} key={`${character.id}-${id}`}>
               <Link  to={`/character/${character.id}`} >
                 <Card margin={'auto'}  sx={{ borderRadius: '10px' }} >
                   <Grid container padding={2} >
@@ -71,7 +71,7 @@ function Home() {
                         {character.status === 'Alive' ? <CircleIcon sx={{fontSize:'10px', marginRight:'5px' , color:'green'}} /> : character.status === 'Dead' ? <CircleIcon sx={{fontSize:'10px', marginRight:'5px' , color:'red'}} /> : <CircleIcon sx={{fontSize:'10px', marginRight:'5px' , color:'gray'}} />}
                           {character.status} - {character.species}
                         </Typography>
-                        <Typography variant='h6' sx={{ color: '#bdbdbd4a'}}>
+                        <Typography variant='h6' >
                         Last known location: <br/>
                         </Typography>
                         <Typography variant="h5" sx={{ fontWeight: 500, color: 'text.secondary'}}>

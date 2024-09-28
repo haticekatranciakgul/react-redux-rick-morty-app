@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import charactersReducer from './charactersSlice'; // Doğru reducer'ı import ediyoruz
-// import locationsReducer from './locationsSlice';
-// import episodesReducer from './episodesReucer';
+import charactersReducer from './charactersSlice'; 
+import locationsReducer from './locationsSlice';
+import episodesReducer from './episodesSlice';
 
 
 export const store = configureStore({
   reducer: {
-    characters: charactersReducer, // charactersReducer'ı buraya ekliyoruz
-    // locations: locationsReducer,
-    // episodes: episodesReducer,
+    characters: charactersReducer,
+    episodes: episodesReducer,
+    locations: locationsReducer,
   },
 });

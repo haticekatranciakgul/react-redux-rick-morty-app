@@ -34,7 +34,7 @@ const Navbar = () => {
     }
 
     return (
-        <AppBar position="static" backgroundColor={'#1212124f'}>
+        <AppBar position="static" >
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -50,16 +50,13 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        <Link to={`/`}>
-                            <img
-                                component="img"
-                                height="auto"
-                                src='./favicon.ico'
-                                alt='logo' width={'30px'}
-                                sx={{ borderRadius: '10px' }}
-                            />
-
-                        </Link>
+                        <img
+                            component="img"
+                            height="auto"
+                            src='./favicon.ico'
+                            alt='logo' width={'30px'}
+                            sx={{ borderRadius: '10px' }}
+                        />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

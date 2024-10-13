@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename='/react-redux-rick-morty-app'>
         <Routes>
           <Route path="/" element={<Home />}>
             <Route path="/" element={<Characters />} />

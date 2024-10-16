@@ -1,5 +1,8 @@
 # Rick and Morty App React Redux MUI
 
+## Live 
+https://haticekatranciakgul.github.io/react-redux-rick-morty-app/
+
 ![Screenshot 2024-10-16 at 11 54 53](https://github.com/user-attachments/assets/90f91fe1-9fbf-48d7-9366-8d6708d14797)
 
 
